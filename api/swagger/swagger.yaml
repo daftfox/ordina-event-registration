@@ -1,0 +1,472 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Ordina event registration (OER)
+  description: Back-end for the OER system
+  contact:
+    name: Timothy Claassens
+    url: http://www.ordina.nl
+    email: tim.claassens@ordina.nl
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /api
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /event:
+    x-swagger-router-controller: events.controller
+    put:
+      description: Update an already existing event
+      operationId: updateEvent
+      parameters:
+        - name: event
+          in: body
+          required: true
+          description: The event object
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Adds a new event to the system
+      operationId: newEvent
+      parameters:
+        - name: event
+          in: body
+          required: true
+          description: The event object
+          schema:
+            $ref: "#/definitions/Event"
+      produces: 
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Id"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "409":
+          description: Conflict
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /event/all:
+    x-swagger-router-controller: events.controller
+    get:
+      description: Get all events
+      operationId: getAllEvents
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Event"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /season:
+    x-swagger-router-controller: seasons.controller
+    post:
+      description: Adds a new season to the system
+      operationId: newSeason
+      parameters:
+        - name: season
+          in: body
+          required: true
+          description: The season object
+          schema:
+            $ref: "#/definitions/Season"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Id"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "409":
+          description: Conflict
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /season/all:
+    x-swagger-router-controller: seasons.controller
+    get:
+      description: Get all seasons
+      operationId: getAllSeasons
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Season"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /season/{seasonId}:
+    x-swagger-router-controller: seasons.controller
+    put:
+      description: Update an already existing season
+      operationId: updateSeason
+      parameters:
+        - name: seasonId
+          in: path
+          description: Id of the season
+          type: number
+          required: true
+        - name: season
+          in: body
+          required: true
+          description: The season object
+          schema:
+            $ref: "#/definitions/Season"
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      description: Get all data of season with the specified Id
+      operationId: getSeason
+      parameters:
+        - name: seasonId
+          in: path
+          description: Id of the season
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Season"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+  
+  /event/{eventId}:
+    x-swagger-router-controller: events.controller
+    get:
+      description: Get all data of event with the specified Id
+      operationId: getEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: Id of the event
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Event"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /registration:
+    x-swagger-router-controller: registrations.controller
+    post:
+      description: Adds a new registration to the system, eg. it registers a user
+      operationId: registerUser
+      parameters:
+        - name: registration
+          in: body
+          required: true
+          description: The registration object
+          schema:
+            $ref: "#/definitions/Registration"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/Id"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "409":
+          description: Conflict
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        
+  
+  /registration/{eventId}/availability:
+    x-swagger-router-controller: events.controller
+    get:
+      description: Returns the number of still available seats for the specified event
+      operationId: availability
+      parameters:
+        - name: eventId
+          in: path
+          type: number
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Availability"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "410":
+          description: Gone
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+  /swagger:
+    x-swagger-pipe: swagger_raw
+    
+# complex objects have schema definitions
+definitions:
+  Id:
+    properties:
+      id:
+        type: integer
+        format: int32
+  
+  Availability:
+    properties:
+      availability:
+        type: integer
+        format: int32
+        minimum: 0
+        
+  Season:
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 64
+      id:
+        type: integer
+        format: int32
+      description:
+        type: [string, "null"]
+        minLength: 1
+        maxLength: 128
+      creation_date:
+        type: string
+    required:
+      - name
+
+  Event:
+    required:
+      - name
+      - location
+      - end_sale_date
+      - event_date
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 64
+      id:
+        type: integer
+        format: int32
+      season_id:
+        type: [integer, "null"]
+        format: int32
+        default: 0
+      description:
+        type: [string, "null"]
+        minLength: 1
+        maxLength: 128
+      max_tickets:
+        type: [integer, "null"]
+        format: int32
+      fee:
+        type: number
+        default: 0.0
+        format: float
+      location:
+        type: string
+        minLength: 1
+        maxLength: 128
+      end_sale_date:
+        type: string
+      event_date:
+        type: string
+      creation_date:
+        type: string
+      
+  Registration:
+    required:
+      - name
+      - email
+      - event_id
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 64
+      email:
+        type: string
+        minLength: 1
+        maxLength: 64
+      registration_date:
+        type: string
+      event_id:
+        type: integer
+        format: int32
+  
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: [string, object]

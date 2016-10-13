@@ -1,0 +1,24 @@
+{
+  "name": "Ordina event registration",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Module for the registration of guests for any event",
+  "keywords": ["registration", "events"],
+  "author": "Timothy Claassens",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.12.3",
+    "moment": "^2.15.1",
+    "mysql": "^2.11.1",
+    "swagger-express-mw": "^0.1.0"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "swagger project test"
+  }
+}
