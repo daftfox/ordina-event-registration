@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "description": "Module for the registration of guests for any event",
-  "keywords": ["registration", "events"],
+  "keywords": [
+    "registration",
+    "events"
+  ],
   "author": "Timothy Claassens",
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.12.3",
     "moment": "^2.15.1",
     "mysql": "^2.11.1",
