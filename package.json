@@ -1,5 +1,5 @@
 {
-  "name": "Ordina event registration",
+  "name": "ordina-event-registration",
   "version": "0.0.1",
   "private": true,
   "description": "Module for the registration of guests for any event",
