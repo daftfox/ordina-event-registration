@@ -62,7 +62,7 @@ exports.getAllEvents = function(args, res, next) {
                         event_date      : moment(rows[i].event_date).format('YYYY-MM-DD HH:mm:ss'),
                         description     : rows[i].description,
                         max_tickets     : rows[i].max_tickets,
-                        fee             : rows[i].fee,
+                        fee             : rows[i].fee || 0.0,
                         location        : rows[i].location,
                         end_sale_date   : moment(rows[i].end_sale_date).format('YYYY-MM-DD HH:mm:ss'),
                         creation_date   : moment(rows[i].creation_date).format('YYYY-MM-DD HH:mm:ss')

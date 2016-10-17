@@ -13,8 +13,8 @@ var firstId = 1,
     max_tickets:    250,
     fee:            10.5,
     location:       'Hoofdkantoor Ordina, Nieuwegein',
-    end_sale_date:  '2017-01-31 12:00:00',
-    event_date:     '2017-02-14 18:00:00'
+    end_sale_date:  '2017-01-31 13:00:00',
+    event_date:     '2017-02-14 19:00:00'
 },  event2 = {
     name:           'Testevent 2',
     description:    'Testdescription 2',
@@ -22,8 +22,8 @@ var firstId = 1,
     max_tickets:    250,
     fee:            10.5,
     location:       'Hoofdkantoor Ordina, Nieuwegein',
-    end_sale_date:  '2017-01-31 12:00:00',
-    event_date:     '2017-02-15 19:00:00'
+    end_sale_date:  '2017-01-31 14:00:00',
+    event_date:     '2017-02-15 20:00:00'
 },  faultyEvent = {
     description:    'Testdescription',
     season_id:      null,

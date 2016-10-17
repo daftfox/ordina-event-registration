@@ -8,7 +8,7 @@ info:
     url: http://www.ordina.nl
     email: tim.claassens@ordina.nl
 # during dev, should point to your local machine
-host: localhost:10010
+host: localhost:3000
 # basePath prefixes all resource paths 
 basePath: /api
 # 
