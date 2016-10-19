@@ -15,7 +15,6 @@ exports.registerUser = function(args, res, next) {
 
     var sql =   "INSERT INTO registrations (name, email, event_id)" +
                 "VALUES (?, ?, ?);";
-
     if(registration){
         db.getConnection(function(err, connection) {
             message = err;
